@@ -1,0 +1,192 @@
+.title {
+  font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+  font-size: 24px;
+  font-weight: 800;
+  color: #585858;
+  text-align: center;
+}
+
+#instructions-container {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  width: 100%;
+}
+
+.instructions {
+  font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+  font-size: 16px;
+  font-weight: 400;
+}
+
+h3 {
+  font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+  font-size: 18px;
+  font-weight: 700;
+  color: #379953;
+}
+
+
+/* contains all elements on the page */
+#main-container {
+  margin: 50px;
+  padding: 10px;
+}
+
+/* contains the upload button */
+#upload-container {
+  margin-bottom: 10px;
+}
+
+/* contains the image and box */
+#editor {
+  visibility: hidden;
+  background-color: turquoise;
+
+  /* border: solid green 5px; */
+  position: relative
+}
+
+/* contains the image */
+.image-container {
+  border: solid rgb(104, 104, 104) 5px;
+  position: absolute;
+}
+
+.box {
+  visibility: hidden;
+  border: solid red 5px;
+  position: absolute;
+  height: 150px;
+}
+
+.resize-handle {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  background-color: lightblue;
+  border: solid 1px black;
+  cursor: ns-resize;
+}
+
+/* button styling */
+.button {
+  width: 15em;
+  appearance: none;
+  background-color: #2ea44f;
+  border: 1px solid rgba(27, 31, 35, .15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  padding: 6px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+#create-image-button {
+  width: 6em;
+  visibility: hidden;
+  background-color: rgb(56, 84, 243);
+  color: #fff;
+}
+#addToCalendar {
+  width: 12em;
+  visibility: hidden;
+  background-color: rgb(56, 84, 243);
+  color: #fff;
+}
+
+/* #finalDays {
+  visibility: hidden;
+} */
+
+.button:focus:not(:focus-visible):not(.focus-visible) {
+  box-shadow: none;
+  outline: none;
+}
+#create-image-button:focus:not(:focus-visible):not(.focus-visible) {
+  box-shadow: none;
+  outline: none;
+}
+
+.button:hover {
+  background-color:  #2c974b;
+}
+#create-image-button:hover {
+  background-color: rgb(48, 71, 204)
+}
+
+.button:focus {
+  box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
+  outline: none;
+}
+
+.button:disabled {
+  background-color: #94d3a2;
+  border-color: rgba(27, 31, 35, .1);
+  color: rgba(255, 255, 255, .8);
+  cursor: default;
+}
+
+.button:active {
+  background-color: #298e46;
+  box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
+}
+#create-image-button:active {
+  background-color: rgb(41, 60, 172);
+  box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
+}
+
+
+/* Small devices (portrait smartphones, less than 576px) */
+@media (max-width: 575.98px) {
+  #main-container {
+    margin: 20px;
+    padding: 5px;
+  }
+
+  .box {
+    height: 100px;
+  }
+
+  .resize-handle {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+/* Medium devices (landscape smartphones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  #main-container {
+    margin: 30px;
+    padding: 8px;
+  }
+
+  .box {
+    height: 120px;
+  }
+
+  .resize-handle {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* Large devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  /* Styles for tablets and larger devices */
+  /* No changes needed here for current CSS */
+}

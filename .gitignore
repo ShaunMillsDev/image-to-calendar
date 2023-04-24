@@ -1,2 +1,5 @@
-images/
+eng.traineddata
+uploads/
+node_modules/
 *.png
+images/

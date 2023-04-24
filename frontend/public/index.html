@@ -1,0 +1,38 @@
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    </head>
+    <body>
+        <div id="main-container">
+            <h1 class="title">Image to Calendar</h1>
+
+            <div id="instructions-container">
+                <h3 id="instructions-title">How to use:</h3>
+                <p class="instructions"><b>1.</b> Select the image of your work schedule using the <b>'Select Image'</b> button.</p>
+                <p class="instructions"><b>2.</b> Move and resize the red box around each day and press the <b>'Add'</b> button.</p>
+                <p class="instructions"><b>3.</b> When you have selected all the days you want to add to your calendar, press the <b>'Add to Calendar'</b> button to add your selections to your Google Calendar.</p>
+            </div>
+
+            <div id="upload-container">
+                <label for="imageUpload" class="button">Select Image</label>
+                <input type="file" id="imageUpload" style="display: none;">
+
+                <button class="button" id="create-image-button">Add</button>
+
+                <button class="button" id="addToCalendar">Add Images Calendar</button>
+            </div>
+
+            <div id="editor">
+                <div class="image-container"></div>
+                <div class="box"></div>
+            </div>
+
+            <div id="finalDays">
+            </div>
+        </div>
+
+        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    </body>
+</html>
+
