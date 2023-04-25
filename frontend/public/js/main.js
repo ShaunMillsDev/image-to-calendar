@@ -1,3 +1,4 @@
+
 // Get the input element for the image upload
 const input = document.getElementById('imageUpload');
 const resizeHandle = document.createElement('div');
@@ -19,40 +20,51 @@ let boxHeight = 0;
 resizeHandle.classList.add('resize-handle');
 box.appendChild(resizeHandle);
 
+
+// Button for adding the picture slices to calendar
 document.getElementById('addToCalendar').addEventListener('click', async () => {
-  // Get all images in the 'finalDays' div
-  const images = document.querySelectorAll('#finalDays img');
-  
-  // Convert images to base64-encoded strings
-  const imageStrings = [];
+  const finalDays = document.getElementById('finalDays');
+  const images = finalDays.getElementsByTagName('img');
+
+  const base64Images = [];
+
   for (const img of images) {
     const canvas = document.createElement('canvas');
     canvas.width = img.width;
     canvas.height = img.height;
     const ctx = canvas.getContext('2d');
     ctx.drawImage(img, 0, 0);
-    const dataURL = canvas.toDataURL('image/png');
-    const base64String = dataURL.split(',')[1];
-    imageStrings.push(base64String);
+    base64Images.push(canvas.toDataURL().split(',')[1]);
   }
 
-  // Send the array of images to the server
-  const response = await fetch('/process_images', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ images: imageStrings })
-  });
+  try {
+    const response = await fetch('/extract-text', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ images: base64Images })
+    });
 
-  const result = await response.json();
-  if (result.status === 'success') {
-    // Handle success (e.g., show a message or redirect the user)
-  } else {
-    // Handle error (e.g., show an error message)
+    const data = await response.json();
+    const authUrl = data.authUrl;
+
+    document.body.classList.add('hide-elements');
+
+    // Create a button for the user to click
+    const button = document.createElement('button');
+    button.textContent = 'Authorise App';
+    button.classList.add('button');
+    button.onclick = () => {
+      window.location.href = authUrl;
+      button.remove();
+    };
+    document.body.appendChild(button);
+
+  } catch (error) {
+    console.error('Error:', error);
   }
 });
-
 
 // For changing the image
 input.addEventListener('change', () => {
@@ -91,10 +103,10 @@ input.addEventListener('change', () => {
 
       // Calculate the maximum width for the image, considering the available screen size
       const maxWidth = window.innerWidth * 0.8;
-  
+
       // Calculate the scaling factor based on the maximum width
       const scaleFactor = maxWidth / img.width;
-  
+
       // Scale the image width and height
       const scaledWidth = img.width * scaleFactor;
       const scaledHeight = img.height * scaleFactor;
@@ -102,15 +114,15 @@ input.addEventListener('change', () => {
       // Set the width and height attributes of the img element to the new scaled dimensions
       img.width = scaledWidth;
       img.height = scaledHeight;
-  
+
       // Set the width and height of the image container and editor to match the uploaded image size
       editor.style.width = `${scaledWidth + 9}px`;
       editor.style.height = `${scaledHeight + 10}px`;
 
-      imageContainer.style.width = `${scaledWidth-1}px`;
+      imageContainer.style.width = `${scaledWidth - 1}px`;
       imageContainer.style.height = `${scaledHeight}px`;
 
-      box.style.width = `${scaledWidth-1}px`;
+      box.style.width = `${scaledWidth - 1}px`;
       box.style.top = img.top;
       box.style.left = img.left;
     }
@@ -211,14 +223,14 @@ function startResizing(event) {
 function updateBoxPosition(event) {
   event.preventDefault(); // Prevent default touch actions like scrolling
 
-  const clientY = event.clientY || event.touches[0].clientY;
-  
+  const clientY = event.clientY || (event.touches && event.touches.length > 0 && event.touches[0].clientY);
+
   if (isDragging) {
     // Calculate the new top position of the box
     const newTop = boxTop + (clientY - startY);
 
     // Get the height of the editor and the box
-    const editorHeight = editor.clientHeight-10;
+    const editorHeight = editor.clientHeight - 10;
     const boxHeight = box.clientHeight;
 
     // Constrain the box to stay within the bounds of the editor
@@ -235,7 +247,7 @@ function updateBoxPosition(event) {
     const newHeight = boxHeight + (clientY - startHeight);
 
     // Get the height of the editor
-    const editorHeight = editor.clientHeight-10;
+    const editorHeight = editor.clientHeight - 10;
 
     // Constrain the box to stay within the bounds of the editor
     const minHeight = 0;
