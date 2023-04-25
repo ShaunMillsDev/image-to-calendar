@@ -25,7 +25,6 @@ h3 {
   color: #379953;
 }
 
-
 /* contains all elements on the page */
 #main-container {
   margin: 50px;
@@ -41,8 +40,6 @@ h3 {
 #editor {
   visibility: hidden;
   background-color: turquoise;
-
-  /* border: solid green 5px; */
   position: relative
 }
 
